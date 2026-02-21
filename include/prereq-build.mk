@@ -194,8 +194,9 @@ $(eval $(call SetupHostCommand,python3,Please install Python >= 3.6, \
 	python3 -V 2>&1 | grep -E 'Python 3\.([6-9]|[0-9][0-9])\.?'))
 
 $(eval $(call TestHostCommand,python3-distutils, \
-	Please install the Python3 distutils module, \
-	$(STAGING_DIR_HOST)/bin/python3 -c 'from distutils import util'))
+	Please install the Python3 distutils or setuptools module, \
+	$(STAGING_DIR_HOST)/bin/python3 -c 'from distutils import util' 2>/dev/null || \
+	$(STAGING_DIR_HOST)/bin/python3 -c 'import setuptools'))
 
 $(eval $(call TestHostCommand,python3-stdlib, \
 	Please install the Python3 stdlib module, \
