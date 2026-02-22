@@ -23,7 +23,7 @@ jobs:
         run: |
           # Ubuntu 24.04+ doesn't have python3-distutils package
           # Install required Python packages via pip
-          python3 -m pip install --user setuptools pyelftools
+          python3 -m pip install --break-system-packages setuptools pyelftools
 
       - name: Check Python version
         run: |
