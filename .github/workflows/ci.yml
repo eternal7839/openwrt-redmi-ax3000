@@ -29,6 +29,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Fix Python path for OpenWrt
+        run: |
+          # Ensure python3 points to a working Python with distutils
+          sudo ln -sf $(which python3) /usr/local/bin/python3
+          # Create staging dir structure early to avoid permission issues
+          mkdir -p staging_dir/host/bin
+          # Link system python to staging dir for prereq check
+          sudo ln -sf $(which python3) staging_dir/host/bin/python3 || true
+
       - name: Hook the openwrt_core URL for opkg
         run: |
           OWNER="${GITHUB_REPOSITORY%%/*}"
