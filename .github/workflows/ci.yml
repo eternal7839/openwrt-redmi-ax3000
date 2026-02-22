@@ -34,6 +34,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Cache DL downloads
+        uses: actions/cache@v4
+        with:
+          path: dl
+          key: ${{ runner.os }}-openwrt-dl-${{ hashFiles('**/Makefile', 'include/kernel-*') }}
+          restore-keys: |
+            ${{ runner.os }}-openwrt-dl-
+
+      - name: Cache build directory
+        uses: actions/cache@v4
+        with:
+          path: build_dir
+          key: ${{ runner.os }}-openwrt-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-openwrt-build-
+
+      - name: Cache staging directory
+        uses: actions/cache@v4
+        with:
+          path: staging_dir
+          key: ${{ runner.os }}-openwrt-staging-${{ hashFiles('**/Makefile', 'include/kernel-*') }}
+          restore-keys: |
+            ${{ runner.os }}-openwrt-staging-
+
       - name: Fix Python path for OpenWrt
         run: |
           # Ensure python3 points to a working Python with distutils
