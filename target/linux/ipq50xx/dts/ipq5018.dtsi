@@ -1,10 +1,84 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * IPQ5018 SoC device tree source for OpenWrt
+ * Based on Linux 6.6 upstream device tree with custom additions
+ */
+
 #ifdef __ARM32__
 	// Search in arch/arm/boot/dts/
 	#include <../../../arm64/boot/dts/qcom/ipq5018.dtsi>
-	#include <qcom-ipq5018.dtsi>
 #elif __AARCH64__
 	// Search in arch/arm64/boot/dts/
 	#include <qcom/ipq5018.dtsi>
 #else
 	#error "Please define __ARM32__ or __AARCH64__ when compiling dts"
 #endif
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+
+/ {
+	// Add any IPQ5018 specific overrides here
+	// Most definitions are now in upstream Linux 6.6
+
+	reserved-memory {
+		// Memory reservations for WiFi and other subsystems
+		// These may need adjustment based on actual hardware
+	};
+};
+
+&gcc {
+	// GCC clock controller is defined in upstream
+	// Add any custom clock configurations here
+};
+
+&tlmm {
+	// Pin controller is defined in upstream
+	// Add any custom pin configurations here
+};
+
+&blsp1_uart1 {
+	// UART is defined in upstream
+	status = "okay";
+};
+
+&qpic_nand {
+	// NAND controller is defined in upstream
+	// Custom configurations for specific NAND chips
+	status = "okay";
+};
+
+&mdio {
+	// MDIO bus is defined in upstream
+	status = "okay";
+};
+
+&dp1 {
+	// NSS DP interface 1
+	status = "okay";
+};
+
+&dp2 {
+	// NSS DP interface 2
+	status = "okay";
+};
+
+&pcie0 {
+	// PCIe controller
+	status = "okay";
+};
+
+&pcie1 {
+	// PCIe controller
+	status = "okay";
+};
+
+&wifi0 {
+	// 2.4G WiFi (IPQ5018 internal)
+	status = "okay";
+};
+
+&wifi1 {
+	// 5G WiFi (QCN6122 or similar)
+	status = "okay";
+};
