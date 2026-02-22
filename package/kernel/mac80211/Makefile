@@ -12,7 +12,9 @@ PKG_NAME:=mac80211
 
 PKG_VERSION:=6.6.15
 PKG_RELEASE:=1
-PKG_SOURCE_URL:=@KERNEL/linux/kernel/projects/backports/stable/v6.6.15/
+PKG_SOURCE_URL:=\
+	https://cdn.kernel.org/pub/linux/kernel/projects/backports/stable/v6.6.15/ \
+	https://www.kernel.org/pub/linux/kernel/projects/backports/stable/v6.6.15/
 PKG_HASH:=3bbc461121134fda9089c084a5eed577d05e7837a157edf9a3797937172a3ece
 
 PKG_SOURCE:=backports-$(PKG_VERSION).tar.xz
